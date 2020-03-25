@@ -1,36 +1,48 @@
-import Tiempo from "./tiempo.js";
-import Fecha from "./fechaRest.js";
-import ElementoPedido from "./elementoPedido.js";
-import cliente from "./cliente.js";
-import Cliente from "./cliente.js";
-import Direccion from "./direccion.js";
 import Precio from "./precio.js";
-import Producto from "./producto.js";
-
 export default class Pedido {
     /**
-     *
+     * 
      * @param {Fecha} fecha 
      * @param {Tiempo} hora 
-     * @param {Cliente} cliente 
+     * @param {cliente} cliente 
+     * @param {elementosPedidos} elementosPedidos
      */
-    constructor(fecha, hora, cliente) {
-      this.fecha = fecha;
-      this.hora = hora;
-      this.cliente = cliente;
-      this.elementosPedidos = new Array();
+    constructor({fecha,hora,cliente,numeroPedido}){
+        this._fecha=fecha;
+        this._hora=hora;
+        this._cliente=cliente;
+        this._numeroPedido =numeroPedido;
+        this._elementosPedidos=[];
+        
     }
-  
-    getResumen() {
-      return `${this.fecha.getFecha()} ${this.hora.getFormato12()} - ${this.getNumeroElementos()} elementos con ${this.getProductos()} productos - total: ${this.getCostoTotal()}  `
+    
+    getResumen(){
+        return `${this._fecha.getFecha()} ${this._hora.getFormato12()} Pedido No. ${this._numeroPedido} Un total de ${this.getNumeroElementos()} Elementos con ${this.getNumeroProductos()} productos total: ${this.getCostoTotal()}`;
     }
-  
-    getNumeroElementos() {
-      return this.elementosPedidos.length
+    getNumeroElementos(){
+        return (this._elementosPedidos.length);
     }
-  
-    getProductos() {
-      let x = 0;
-      this.elementosPedidos.forEach(elemento => {
-        x = elemento.cantidad + x
-      })
+    getNumeroProductos(){
+        var nProductos = 0;
+        this._elementosPedidos.forEach(elemento => {
+            nProductos+=elemento._cantidad;
+        });
+        return nProductos;
+    }
+    getCostoTotal(){
+        var total = 0;
+        this._elementosPedidos.forEach(elemento => {
+            total += elemento._cantidad * elemento._producto._precio._valor;
+        });
+        return new Precio(total).getPrecio();
+
+    }
+    agregarElemento(elemento){
+        this._elementosPedidos.push(elemento)
+    }
+    listarElementos(){
+        this._elementosPedidos.forEach(elemento=>{
+            console.log(elemento.getDescripcion())
+        });
+    }
+}

@@ -6,8 +6,8 @@ export default class Fecha{
      * @param {number} año 
      */    
     constructor(dia, mes, año){ 
-        this.fecha = new Date(año, mes-1, dia);
-        this.diaSemana = [
+        this._fecha = new Date(año, mes-1, dia);
+        this._diaSemana = [
             "Domingo", 
             "Lunes", 
             "Martes", 
@@ -15,7 +15,7 @@ export default class Fecha{
             "Jueves", 
             "Viernes", 
             "Sabado"];
-        this.mesAño = [
+        this._mesAño = [
             "Enero", 
             "Febrero", 
             "Marzo", 
@@ -30,33 +30,33 @@ export default class Fecha{
             "Diciembre"];
     }
     getAños(){
-        let x = Date.now() - this.fecha;
+        let x = Date.now() - this._fecha;
         let z = 1000*60*60*24*365;
         let fechaDiferencia = Math.trunc(x/z);
         return `la diferencia de la fecha es de ${fechaDiferencia} años`;
     }
     getMeses(){
-        let x = Date.now() - this.fecha;
+        let x = Date.now() - this._fecha;
         let z = 1000*60*60*24*7*4;
         let fechaDiferencia = Math.trunc(x/z);
         return `la diferencia de la fecha es de ${fechaDiferencia} meses`;
     }
     getSemanas(){
-        let x = Date.now() - this.fecha;
+        let x = Date.now() - this._fecha;
         let z = 1000*60*60*24*7;
         let fechaDiferencia = Math.trunc(x/z);
         return `la diferencia de la fecha es de ${fechaDiferencia} semanas`;
     }
     getDias(){
-        let x = Date.now() - this.fecha;
+        let x = Date.now() - this._fecha;
         let z = 1000*60*60*24;
         let fechaDiferencia = Math.trunc(x/z);
         return `la diferencia de la fecha es de ${fechaDiferencia} dias`; 
     }
     getFecha(){
-        return `${this.fecha.getDate()}/${this.mesAño[this.fecha.getMonth()]}/${this.fecha.getFullYear()}`;
+        return `${this._fecha.getDate()}/${this._mesAño[this._fecha.getMonth()]}/${this._fecha.getFullYear()}`;
     }
     getDiaFecha(){
-        return `${this.diaSemana[this.fecha.getDay()]}`;        
+        return `${this._diaSemana[this._fecha.getDay()]}`;        
     }
 }

@@ -11,21 +11,21 @@ export default class Direccion {
  */
     constructor(calle, numeroExt, numeroInt, colonia, codigoPost, ciudad, municipio ) {
 
-        this.calle = calle;
-        this.numeroExt = numeroExt;
-        this.numeroInt = numeroInt;
-        this.colonia = colonia;
-        this.codigoPost = codigoPost;
-        this.ciudad = ciudad;
-        this.municipio = municipio;
+        this._calle = calle;
+        this._numeroExt = numeroExt;
+        this._numeroInt = numeroInt;
+        this._colonia = colonia;
+        this._codigoPost = codigoPost;
+        this._ciudad = ciudad;
+        this._municipio = municipio;
 
 
     }
     getFormatoCorto(){
-     return (`${this.calle} ${this.numeroExt}`)
+     return (`${this._calle} ${this._numeroExt}`);
     }
     getFormatoExtendido(){
-     return (`Calle:${this.calle}, Número exterior:${this.numeroExt}, Número interior:${this.numeroInt}, Colonia:${this.colonia}, Codigo postal:${this.codigoPost}, Ciudad:${this.ciudad}, Municipio:${this.municipio}`)
+     return (`Calle:${this._calle}, Número exterior:${this._numeroExt}, Número interior:${this._numeroInt}, Colonia:${this._colonia}, Codigo postal:${this._codigoPost}, Ciudad:${this._ciudad}, Municipio:${this._municipio}`);
 
     }
 }
